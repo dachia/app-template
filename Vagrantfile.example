@@ -1,0 +1,48 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+  # set vagrant box to official ubuntu 14.04 x64
+  config.vm.box = "ubuntu/trusty64"
+
+  # check box repository periodically for updates
+  config.vm.box_check_update = true
+
+  # vagrant machine will be available on host machine on "ip"
+  config.vm.network "private_network", ip: "192.168.33.10"
+
+  # sync app to /srv
+  config.vm.synced_folder "src", "/var/www/app", group: "www-data", owner: "vagrant"
+
+  # salt folders
+  config.vm.synced_folder "salt/roots", "/srv/salt"
+  config.vm.synced_folder "salt/pillar", "/srv/pillar"
+
+  # fix locale
+  config.vm.provision "shell", name: "fix locale", inline: <<-SHELL
+    sudo echo "LC_ALL=\"en_US.UTF-8\"" > /etc/default/locale
+    sudo dpkg-reconfigure locales
+  SHELL
+
+  config.vm.provision "shell", name: "salt gitbackend", inline: <<-SHELL
+    apt-get update
+    apt-get install -y python-git
+  SHELL
+
+  config.vm.provision :salt do |salt|
+    # Vagrant 1.7.4. workaround
+    salt.install_master = false
+    salt.install_type = "git"
+    salt.install_args = "v2015.8.0"
+
+    salt.minion_config = "salt/minion.dev"
+    # Vagrant 1.7.4. workaround (no permissions, pip -P flag)
+    salt.bootstrap_options = "-F -P  -c /tmp"
+
+    salt.colorize = true
+    salt.verbose = true
+    salt.log_level = "info"
+
+    salt.run_highstate = true
+  end
+end

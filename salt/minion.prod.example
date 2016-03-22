@@ -1,0 +1,25 @@
+# id
+id: com.dachia.app.prod
+
+# masterless
+file_client: local
+
+fileserver_backend:
+  - roots
+  - git
+
+gitfs_remotes:
+  - https://github.com/dachia/uwsgi-formula.git
+  - https://github.com/dachia/timezone-formula.git
+  - https://github.com/dachia/ntp-formula.git
+  - https://github.com/dachia/nginx-formula.git
+  - https://github.com/dachia/virtualenv-formula.git
+  - https://github.com/dachia/users-formula.git
+
+file_roots:
+  base:
+    - /srv/salt
+
+pillar_roots:
+  base:
+    - /srv/pillar

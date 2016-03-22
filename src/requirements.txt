@@ -1,0 +1,5 @@
+flask
+pytest
+pytest-flask
+pytest-pep8
+boto==2.38.0
