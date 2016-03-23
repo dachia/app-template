@@ -53,7 +53,9 @@ nginx:
               - listen:
                 - 80
 
-              - location /:
+              - root: /var/www/app/dist
+
+              - location /api:
                 - include: uwsgi_params
                 - uwsgi_pass: 'unix:///tmp/app.sock'
 
@@ -62,5 +64,8 @@ nginx:
 
               - location = /favicon.ico:
                 - root: /var/www/app
+
+              - location /:
+                - try_files: $uri /index.html
 
 

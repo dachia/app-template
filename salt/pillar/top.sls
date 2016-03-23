@@ -4,6 +4,7 @@ base:
     - ntp
     - nginx
     - uwsgi
+    - nodejs
 
   '*.dev':
     - dev.app

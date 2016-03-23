@@ -7,13 +7,15 @@ base:
 
     - uwsgi.pip
     - uwsgi.application_config
-    - uwsgi.upstart
-
-    - nginx.ng
 
     - virtualenv
 
     - app
 
+    - uwsgi.upstart
+    - nginx.ng
+
   '*.dev':
     - tools.fab
+    - tools.nodejs
+    - tools.gulp

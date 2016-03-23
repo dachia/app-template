@@ -80,6 +80,10 @@ fabric.properties
 .vagrant/
 Vagrantfile
 
+### Node.js ###
+node_modules
+
+
 ### Project specific ###
 .idea
 minion.dev
@@ -87,3 +91,4 @@ minion.prod
 src/env
 *.pem
 *.pyc
+*.log
