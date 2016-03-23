@@ -20,8 +20,9 @@ include:
       - file: {{ app.path.app }}
 
 'app_npm_bootstrap':
-  npm.bootstrap:
-    - name: {{ app.path.app }}
+  cmd.run:
+    - cwd: {{ app.path.app }}
+    - name: npm install --json
     - user: '{{ app.user }}'
     - require:
       - file: node_symlink
