@@ -15,6 +15,7 @@ gitfs_remotes:
   - https://github.com/dachia/nginx-formula.git
   - https://github.com/dachia/virtualenv-formula.git
   - https://github.com/dachia/users-formula.git
+  - https://github.com/dachia/node-formula.git
 
 file_roots:
   base:

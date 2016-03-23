@@ -53,14 +53,16 @@ nginx:
               - listen:
                 - 80
 
-              - location /:
+              - root: /var/www/app/dist
+              - index: index.html
+
+              - location /api:
                 - include: uwsgi_params
                 - uwsgi_pass: 'unix:///tmp/app.sock'
 
-              - location ^~ /static/:
-                - root: /var/www/app/static
-
-              - location = /favicon.ico:
-                - root: /var/www/app
-
-
+              - location /dist:
+                  - alias: /var/www/app/dist/
+                  - gzip_static: 'on'
+                  - expires: 1y
+                  - add_header: Cache-Control public
+                  - add_header: ETag ""

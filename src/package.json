@@ -1,0 +1,25 @@
+{
+  "private": "true",
+  "dependencies": {
+    "angular": "1.*"
+  },
+  "devDependencies": {
+    "angular-route": "1.*",
+    "del": "*",
+    "browserify": "*",
+    "browserify-ngannotate": "*",
+    "jshint": "*",
+    "gulp": "*",
+    "gulp-cachebust": "*",
+    "gulp-concat": "*",
+    "gulp-install": "*",
+    "gulp-jshint": "*",
+    "gulp-sass": "*",
+    "gulp-sourcemaps": "*",
+    "gulp-uglify": "*",
+    "gulp-util": "*",
+    "gulp-ng-html2js": "*",
+    "vinyl-buffer": "*",
+    "vinyl-source-stream": "*"
+  }
+}
