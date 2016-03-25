@@ -11,9 +11,11 @@ base:
     - virtualenv
 
     - uwsgi.upstart
+
     - nginx.ng
 
   '*.prod':
+    - nginx.auth
     - app.config
 
   '*.dev':

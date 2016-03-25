@@ -37,6 +37,7 @@ def deploy():
     copy_salt_roots_and_pillars()
     salt_highstate()
     set_app_owner()
+    restart_servers()
 
 def install_salt_and_dependencies():
     """Install salt and requirements."""
@@ -56,6 +57,12 @@ def copy_project():
                   remote_dir=REMOTE_PROJECT_PATH,
                   exclude=["*.pyc", ".sass-cache/", "env/", "node_modules/",
                            "vendor/", "config/local.py", "key.pem"])
+
+def restart_servers():
+    """Restart app servers nginx and uwsgi"""
+    sudo("service uwsgi restart")
+    sudo("service nginx restart")
+
 
 def set_app_owner():
     """Set app owner"""

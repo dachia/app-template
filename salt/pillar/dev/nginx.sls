@@ -53,15 +53,15 @@ nginx:
               - listen:
                 - 80
 
-              - root: /var/www/app/dist
+              - root: /var/www/com.teadriven.booking/dist
               - index: index.html
 
               - location /api:
                 - include: uwsgi_params
-                - uwsgi_pass: 'unix:///tmp/app.sock'
+                - uwsgi_pass: 'unix:///tmp/com.teadriven.booking.sock'
 
               - location /dist:
-                  - alias: /var/www/app/dist/
+                  - alias: /var/www/com.teadriven.booking/dist/
                   - gzip_static: 'on'
                   - expires: 1y
                   - add_header: Cache-Control public

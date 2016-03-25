@@ -2,14 +2,16 @@ base:
   '*':
     - timezone
     - ntp
-    - nginx
     - uwsgi
     - nodejs
 
   '*.dev':
-    - dev.app
     - dev.users
+    - dev.app
+    - dev.nginx
 
   '*.prod':
     - prod.app
     - prod.users
+    - prod.nginx
+    - prod.auth
