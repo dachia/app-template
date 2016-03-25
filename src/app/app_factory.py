@@ -7,6 +7,7 @@ def create_app(config_object=None):
         config_object: flask configuration object.
     Returns:
         Configured flask application.
+
     """
     app = Flask(__name__)
 
@@ -16,7 +17,7 @@ def create_app(config_object=None):
     else:
         app.config.from_object(config_object)
 
-    from app.views import views
-    app.register_blueprint(views)
+    from app.api import api_bp
+    app.register_blueprint(api_bp)
 
     return app

@@ -1,5 +1,6 @@
-flask
-pytest
-pytest-flask
-pytest-pep8
+Flask==0.10.1
+Flask-RESTful==0.3.5
 boto==2.38.0
+pytest==2.9.1
+pytest-flask==0.10.0
+pytest-pep8==1.0.6
