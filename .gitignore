@@ -86,8 +86,10 @@ node_modules
 
 ### Project specific ###
 .idea
+src/dist
 minion.dev
 minion.prod
+*.patch
 src/env
 *.pem
 *.pyc

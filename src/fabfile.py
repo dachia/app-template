@@ -14,9 +14,9 @@ env.key_filename = ["key.pem"]
 # env.abort_on_prompts = True
 
 REMOTE_PROJECT_PATH = "/var/www"
-LOCAL_PROJECT_PATH = "/var/www/app"
+LOCAL_PROJECT_PATH = "/var/www/com.teadriven.booking"
 
-REMOTE_USER = "root"
+REMOTE_USER = "ubuntu"
 REMOTE_GROUP = "www-data"
 
 REMOTE_SALT_PATH_ROOTS = "/srv/"
@@ -36,7 +36,7 @@ def deploy():
     copy_project()
     copy_salt_roots_and_pillars()
     salt_highstate()
-
+    set_app_owner()
 
 def install_salt_and_dependencies():
     """Install salt and requirements."""
@@ -55,11 +55,13 @@ def copy_project():
     rsync_project(local_dir=LOCAL_PROJECT_PATH,
                   remote_dir=REMOTE_PROJECT_PATH,
                   exclude=["*.pyc", ".sass-cache/", "env/", "node_modules/",
-                           "vendor/", "config/local.py", "config.js", "key.pem"])
-    # sudo("chown -R %s:%s %s" % (REMOTE_USER,
-    #                             REMOTE_GROUP,
-    #                             REMOTE_PROJECT_PATH))
+                           "vendor/", "config/local.py", "key.pem"])
 
+def set_app_owner():
+    """Set app owner"""
+    sudo("chown -R %s:%s %s" % (REMOTE_USER,
+                                REMOTE_GROUP,
+                                REMOTE_PROJECT_PATH))
 
 def salt_highstate():
     """Provision app, requires salt installed."""

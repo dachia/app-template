@@ -1,25 +1,26 @@
 {
   "private": "true",
-  "dependencies": {
-    "angular": "1.*"
-  },
   "devDependencies": {
-    "angular-route": "1.*",
-    "del": "*",
-    "browserify": "*",
-    "browserify-ngannotate": "*",
-    "jshint": "*",
-    "gulp": "*",
-    "gulp-cachebust": "*",
-    "gulp-concat": "*",
-    "gulp-install": "*",
-    "gulp-jshint": "*",
-    "gulp-sass": "*",
-    "gulp-sourcemaps": "*",
-    "gulp-uglify": "*",
-    "gulp-util": "*",
-    "gulp-ng-html2js": "*",
-    "vinyl-buffer": "*",
-    "vinyl-source-stream": "*"
+    "angular": "^1.5.2",
+    "angular-route": "^1.5.2",
+    "bootstrap-sass": "git+https://github.com/dachia/bootstrap-sass.git",
+    "browserify": "^13.0.0",
+    "browserify-ngannotate": "^2.0.0",
+    "del": "^2.2.0",
+    "eyeglass": "^0.8.3",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-cachebust": "^0.0.6",
+    "gulp-concat": "^2.6.0",
+    "gulp-install": "^0.6.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-ng-html2js": "^0.2.2",
+    "gulp-sass": "^2.2.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.3",
+    "gulp-util": "^3.0.7",
+    "jshint": "^2.9.1",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
   }
 }

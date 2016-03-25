@@ -8,10 +8,33 @@ var gulp = require('gulp'),
     buffer = require('vinyl-buffer'),
     uglify = require('gulp-uglify'),
     gutil = require('gulp-util'),
-    ngAnnotate = require('browserify-ngannotate');
+    ngAnnotate = require('browserify-ngannotate'),
+    eyeglass = require("eyeglass"),
+    autoprefixer = require('gulp-autoprefixer'),
+    CacheBuster = require('gulp-cachebust');
 
-var CacheBuster = require('gulp-cachebust');
+var sassOptions = {
+  // put node-sass options you need here.
+  eyeglass: {
+    enableImportOnce: false
+  }
+};
+
 var cachebust = new CacheBuster();
+
+var autoprefixerOptions = {
+  browsers: [
+    "Android 2.3",
+    "Android >= 4",
+    "Chrome >= 20",
+    "Firefox >= 24",
+    "Explorer >= 8",
+    "iOS >= 6",
+    "Opera >= 12",
+    "Safari >= 6"
+  ],
+  cascade: false
+};
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
@@ -19,10 +42,8 @@ var cachebust = new CacheBuster();
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('clean', function (cb) {
-    del([
-        'dist'
-    ], cb);
+gulp.task('clean', function () {
+    return del(['dist']);
 });
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -48,7 +69,8 @@ gulp.task('bower', function() {
 gulp.task('build-css', function() {
     return gulp.src('./styles/*')
         .pipe(sourcemaps.init())
-        .pipe(sass())
+        .pipe(sass(eyeglass(sassOptions)).on("error", sass.logError))
+        .pipe(autoprefixer(autoprefixerOptions))
         .pipe(cachebust.resources())
         .pipe(sourcemaps.write('./maps'))
         .pipe(gulp.dest('./dist'));
@@ -66,9 +88,9 @@ gulp.task('build-template-cache', function() {
     var ngHtml2Js = require("gulp-ng-html2js"),
         concat = require("gulp-concat");
 
-    return gulp.src("./partials/*.html")
+    return gulp.src(["./partials/**/*.html"])
         .pipe(ngHtml2Js({
-            moduleName: "todoPartials",
+            moduleName: "partialsModule",
             prefix: "/partials/"
         }))
         .pipe(concat("templateCachePartials.js"))
@@ -119,7 +141,7 @@ gulp.task('build-js', function() {
 //
 /////////////////////////////////////////////////////////////////////////////////////
 
-gulp.task('build', [ 'bower','build-css','build-template-cache', 'jshint', 'build-js'], function() {
+gulp.task('build', ['bower', 'build-css', 'build-template-cache', 'jshint', 'build-js'], function() {
     return gulp.src('index.html')
         .pipe(cachebust.references())
         .pipe(gulp.dest('dist'));
@@ -132,5 +154,5 @@ gulp.task('build', [ 'bower','build-css','build-template-cache', 'jshint', 'buil
 /////////////////////////////////////////////////////////////////////////////////////
 
 gulp.task('watch', function() {
-    return gulp.watch(['./index.html','./partials/*.html', './styles/*.*css', './js/**/*.js'], ['build']);
+    return gulp.watch(['./index.html','./partials/**/*.html', './styles/*.*css', './js/**/*.js'], ['build']);
 });

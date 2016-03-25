@@ -10,12 +10,14 @@ base:
 
     - virtualenv
 
-    - app
-
     - uwsgi.upstart
     - nginx.ng
 
+  '*.prod':
+    - app.config
+
   '*.dev':
+    - app
     - tools.fab
     - tools.nodejs
     - tools.gulp
